@@ -17,7 +17,7 @@ from vispy import app
 from vispy.io import load_data_file, read_png
 import numpy as np
 
-# 2x2 pixel checkeboard
+# 2x2 pixel checkerboard
 WIDTH = 2
 
 class TestPanZoomCamera(scene.PanZoomCamera):
@@ -27,7 +27,7 @@ class TestPanZoomCamera(scene.PanZoomCamera):
     def zoom(self, factor, center=None):
         super().zoom(factor, center)
         zoom = WIDTH / view.camera.rect.width
-        print(zoom)
+        print(f"zoom = {zoom:.1f}")
 
 def checkerboard():
     """
@@ -45,12 +45,8 @@ canvas.show()
 # Set up a viewbox to display the image with interactive pan/zoom
 view = canvas.central_widget.add_view()
 
-# Create the image
-img_data = read_png(load_data_file('mona_lisa/mona_lisa_sm.png'))
-interpolation = 'nearest'
-
-image = scene.visuals.Image(checkerboard(), interpolation=interpolation,
-                            parent=view.scene, method='subdivide')
+image = scene.visuals.Image(checkerboard(), interpolation='nearest',
+                            parent=view.scene, method='impostor')
 
 
 view.camera = TestPanZoomCamera(aspect=1)
