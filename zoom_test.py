@@ -46,7 +46,7 @@ canvas.show()
 view = canvas.central_widget.add_view()
 
 image = scene.visuals.Image(checkerboard(), interpolation='nearest',
-                            parent=view.scene, method='impostor')
+                            parent=view.scene, method='subdivide')
 
 
 view.camera = TestPanZoomCamera(aspect=1)
